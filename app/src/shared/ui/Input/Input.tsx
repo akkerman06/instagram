@@ -26,12 +26,12 @@ export const Input: FC<InputProps> = memo(
             className,
           ])}>
             <input type= {type === 'password' &&  typePass ? 'text' : type}  ref = {ref} {...rest}/>
-{/* 
+
             {placeholder && (
                 <span className={classNames(cls.placeh , {} , [value && cls.valueActive])}>
                     {placeholder}
                 </span>
-            )} */}
+            )}
 
             {type === 'password' && value && (
                 <Text className={cls.showPass}
@@ -44,7 +44,7 @@ export const Input: FC<InputProps> = memo(
 
             {error && (
                 <Text size={12} fw={500} className={cls.error}> 
-                    {error}
+                    {error}  
                 </Text>
             )}
        </div>

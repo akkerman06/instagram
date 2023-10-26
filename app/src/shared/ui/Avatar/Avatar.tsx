@@ -35,7 +35,7 @@ export const Avatar: FC<AvatarProps> = memo(
 
     return (
       <div className={classNames(cls.avatar, {}, classes)}>
-        <img src={src} alt="" />
+        {src ? <img src={src} alt="" />  : 'In' }
       </div>
     );
   }

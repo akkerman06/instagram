@@ -1,7 +1,6 @@
 .field {
     position: relative;
     width: 100%;
-    max-width: 260px;
   
     &.fieldError {
       input {
@@ -25,7 +24,7 @@
       border-radius: 3px;
       border: 1px solid #DBDBDB;
       background: var(--theme-color-light);
-      width: 100%;
+      width: 95.5%;
       padding: 9px 7px;
       transition: all 0.2s;
   
@@ -42,6 +41,7 @@
       font-size: 12px;
       pointer-events: none;
       transition: all 0.1s;
+      color: #737373;
   
       &.valueActive {
         top: 0px;
@@ -54,7 +54,7 @@
     .showPass {
       position: absolute;
       top: 50%;
-      right: 10px;
+      right: 20px;
       transform: translateY(-50%);
       cursor: pointer;
       color: var(--gray-color);

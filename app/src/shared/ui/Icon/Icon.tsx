@@ -1,31 +1,13 @@
-import React , { FC , memo} from 'react'
-import { IconTypes , iconName } from './IconName'
-import { Mods, classNames } from "@/shared/lib/ClassNames/ClassNames";
-import cls from './Icon.module.scss'
+import { FC } from "react";
+import cls from "./Icon.module.scss";
+import { IconType, iconName } from "./IconName";
+import { classNames } from "@/shared/lib/ClassNames/ClassNames";
 
-type IconSize = 'm' | 'l' | 'xl'
-
-interface IIcopProps {
-    type: IconTypes,
-    size?: IconSize,
-    className?: string
+interface IconProps {
+  type: IconType;
+  className?: string;
 }
 
-export const Icon: FC<IIcopProps> = memo (
-    ({
-        type , size = 'm' ,className = ''
-    }) => {
-        const getIcon = (type: IconTypes) => {
-            return iconName[type] as JSX.Element
-        }
-        const mods: Mods = {
-            [cls[size]]: true
-        }
-        return (
-            <div className={classNames(cls.icon , mods , [className])}>
-                {getIcon(type)}
-
-            </div>
-        )
-    }
-)
+export const Icon: FC<IconProps> = ({ type, className = '' }) => {
+  return <div className={classNames(cls.icon, {}, [className])}>{iconName[type]}</div>;
+};

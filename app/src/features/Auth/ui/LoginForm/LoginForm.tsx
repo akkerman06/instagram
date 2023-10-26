@@ -2,10 +2,33 @@ import Logo from "@/shared/assets/Logo.png";
 import {Card ,  Button, Form, HStack, Input, Text, VStack, AppLink } from "@/shared/ui";
 import cls from "./LoginForm.module.scss";
 import { Hr } from "@/shared/ui/Hr/Hr";
-
+import { useForm} from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from "@hookform/resolvers/yup";
+// import { login } from "../../model/service/loginByEmail";
+import { useAppDispatch } from "@/shared/lib/useAppDispatch/UseAppDispatch";
+import { Link } from "react-router-dom";
 
 export const LoginForm = () => {
+    const message = 'поле обязательно'
 
+    const schema = yup.object().shape({
+        email: yup.string().email('не валидная почта').required(message),
+        password: yup.string().min(6 , 'минимум 6').required(message)
+    })
+    const {register , handleSubmit , watch , formState } = useForm({
+        mode: 'onChange',
+        resolver: yupResolver(schema)
+
+    })
+
+    const dispatch = useAppDispatch();
+
+    // const onLogin = (data: any) => {
+    //   console.log(data);
+    //   dispatch(login(data));
+    // };
+  
 
 
 
@@ -22,22 +45,28 @@ export const LoginForm = () => {
 
                     />
 
-                    <Form >
+                    <Form  >
                         <Text color="error" size={14} fw={500}>
                         </Text>
 
                         <VStack gap={16}>
                             <VStack gap={16} max>
                                 <Input
+                                type="text"
+                                {...register('email')}
+                                value = {watch('email')}
+                                
                                 placeholder="Телефон, имя пользователя или эл.адрес  "
                                 />
                                 <Input
+                                {...register('password')}
+                                value = {watch('password')}
                                 type="password"
                                 placeholder="Пароль"
                                 />
                             </VStack>
 
-                            <Button
+                            <Button 
                                 color="white"
                                 max
                                 type="submit"
@@ -122,26 +151,29 @@ export const LoginForm = () => {
                     Войти через facebook
                     </Button>
 
-                    <Text size={12} fw={500} as="span" color="solid">
-                        Забыли пароль?
-                    </Text>
+                    
+                    <Link to={'/'}>
+                        <Text size={12} fw={500} as="span" color="solid">
+                            Забыли пароль?
+                        </Text>
+                    </Link>
+                    
                 </VStack>
 
 
             </Card>
 
             <Card>
-                <HStack className={cls.card} max justify="center" gap={8}>
-                    {/* <AppLink to = '/'>
-                        
-                        <Text color="solid" size={12} as="p">
-                        У вас еще нет аккаунта?{" "}
-                        </Text>                        
-                    </AppLink> */}
-
+                <HStack className={cls.card} max justify="center">
+                    <Text as = 'span' size = {12} color = 'solid'>
+                        У вас еще нет аккаунта? 
+                    </Text>
+                    <AppLink to={'/register'}>
                     <Text size={12} as="span" color="blue">
                         Зарегистрироваться
                     </Text>
+                        
+                    </AppLink>
                 </HStack>                
             </Card>
         </VStack>
